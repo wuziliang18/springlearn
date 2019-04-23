@@ -12,7 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 使用spring注入的bean 只有需要的bean才需要mock
+ * 使用spring注入的bean 只有需要的bean才需要mock 使用了springboot的@MockBean
  * 
  * @author ziliang.wu
  *
@@ -20,8 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PersonServiceTestMockFromSpring {
-	// @Mock
-	// CompanyService companyService;
 	@Autowired
 	PersonService personService;
 
@@ -30,14 +28,11 @@ public class PersonServiceTestMockFromSpring {
 
 	@Before
 	public void setUp() {
-		// MockitoAnnotations.initMocks(this);
-		// when(companyService.getByName(anyString())).thenReturn("mock a");
 		when(bankService.getMoeny(anyString())).thenReturn(666666666l);
 	}
 
 	@Test
 	public void getDataTest() {
-
 		System.out.println(personService.getData("123"));
 	}
 }
