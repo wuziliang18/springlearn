@@ -14,6 +14,8 @@ import org.apache.catalina.filters.RemoteIpFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 public class WebConfiguration {
@@ -27,6 +29,16 @@ public class WebConfiguration {
 		return new RemoteIpFilter();
 	}
 
+	@Bean
+	@Order(0)
+	public FilterRegistrationBean<CharacterEncodingFilter> characterEncodingFilterRegistration() {
+		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+		FilterRegistrationBean<CharacterEncodingFilter> registration = new FilterRegistrationBean<CharacterEncodingFilter>(characterEncodingFilter);
+		registration.addInitParameter("encoding", "UTF-8");
+		registration.addInitParameter("forceEncoding", "true");
+		registration.addUrlPatterns("/*");
+		return registration;
+	}
 	@Bean
 	public FilterRegistrationBean filterRegistration() {
 		FilterRegistrationBean registration = new FilterRegistrationBean();
