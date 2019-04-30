@@ -1,4 +1,4 @@
-package com.wuzl.learn.spring.boot.service.controller;
+package com.wuzl.learn.spring.boot.controller;
 
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
@@ -14,7 +14,7 @@ public class IndexControllerTest {
 	public void indexTest() throws Exception {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver(); //在test中重新配置视图解析器
         resolver.setPrefix("/templates/");
-        resolver.setSuffix(".html");
+        resolver.setSuffix(".ftl");
 		IndexController indexController=new IndexController();
 		MockMvc mockMvc=MockMvcBuilders.standaloneSetup(indexController).setViewResolvers(resolver).build();
 		mockMvc.perform(MockMvcRequestBuilders.get("/index")).andExpect(MockMvcResultMatchers.view().name("index"));
